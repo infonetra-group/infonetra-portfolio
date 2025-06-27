@@ -1,4 +1,3 @@
-````markdown
 # Infonetra  
 **Empowering Businesses through Innovative Digital Solutions**
 
@@ -55,8 +54,6 @@ Have a project in mind? Let's talk!
 📧 Email: [infonetra4@gmail.com](mailto:infonetra4@gmail.com)
 🌐 Website: [www.infonetra.com](https://infonetra-group.github.io/infonetra-portfolio/)
 📱 Socials: [LinkedIn](https://www.linkedin.com/in/infonetra-group/) | [Instagram](https://www.instagram.com/infonetra_group/)
-
----
 
 © 2025 Infonetra. All rights reserved.
 
