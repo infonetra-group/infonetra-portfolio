@@ -31,8 +31,8 @@ At **Infonetra**, we specialize in delivering high-quality digital services, inc
 infonetra-portfolio/
 │
 ├── image/              # Images, icons, and other media
-├── css/                 # Stylesheets (Tailwind or custom CSS)
-├── js/                  # Scripts (if any interactivity is added)
+├── css/                 # Stylesheets
+├── js/                  # Scripts
 ├── index.html           # Main homepage
 └── README.md            # Project overview
 ```
