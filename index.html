@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infonetra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="image/Infonetra.ico" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="relative">
+    <canvas id="holoGrid"></canvas>
+    <canvas id="neuralNetwork"></canvas>
+    <canvas id="starBackground"></canvas>
+    <!-- Splash Screen -->
+    <div class="fixed inset-0 bg-black z-50 flex items-center justify-center splash">
+        <div>
+            <h1 class="text-6xl glow-text text-center mb-6" id="splashText">Infonetra</h1>
+            <div class="w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        </div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-1/4 left-1/6 w-3 h-3 rounded-full bg-primary opacity-30 float" style="animation-delay: 0.5s;"></div>
+        <div class="absolute top-1/3 right-1/5 w-2 h-2 rounded-full bg-accent opacity-40 float" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-4 h-4 rounded-full bg-secondary opacity-30 float" style="animation-delay: 1.5s;"></div>
+        <div class="absolute bottom-1/3 left-1/5 w-1.5 h-1.5 rounded-full bg-primary opacity-40 float" style="animation-delay: 0.8s;"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-opacity-90 bg-dark border-b border-primary border-opacity-20">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold glow-text" id="logo">Infonetra</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#services" class="nav-link text-lg uppercase tracking-wider hover:text-primary">Services</a>
+                    <a href="#team" class="nav-link text-lg uppercase tracking-wider hover:text-primary">Team</a>
+                    <a href="#projects" class="nav-link text-lg uppercase tracking-wider hover:text-primary">Projects</a>
+                    <a href="#contact" class="nav-link text-lg uppercase tracking-wider hover:text-primary">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-primary focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-dark opacity-90"></div>
+            <div class="absolute inset-0 opacity-20" style="background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgogIDxyZWN0IHdpZHRoPSI1IiBoZWlnaHQ9IjUiIGZpbGw9IiNmZmYiPjwvcmVjdD4KICA8cGF0aCBkPSJNMCA1TDUgMFpNNiA0TDQgNlpNLTEgMUwxIC0xWiIgc3Ryb2tlPSJ0cmFuc3BhcmVudCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPg==')"></div>
+        </div>
+        <div class="container mx-auto px-6 z-10 text-center">
+            <div class="mb-8">
+                <span class="text-primary uppercase tracking-widest text-sm">Welcome to the Future</span>
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 glow-text">
+                    <span class="block">INNOVATION <br> Through Data</span>
+                </h1>
+                <p class="text-xl md:text-2xl max-w-3xl mx-auto text-gray-300">Where we create digital services that push boundaries and shape the future of business and technology.</p>
+            </div>
+            <div class="text-center mt-10">
+                <a href="#services" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-dark font-bold transition-all hover:shadow-lg hover:scale-105 duration-300 group">
+                    Explore Us
+                    <svg class="w-5 h-5 text-dark group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+    <!-- Our Services Section -->
+    <section id="services" class="py-20 relative gradient-bg diagonal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" id="services-section">
+                <h2 class="section-title text-4xl font-bold mb-4">Our Services</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">We offer cutting-edge solutions designed to move your business into the future.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Service 1 -->
+                <div class="neon-card rounded-xl p-8 transform transition-all duration-500 hover:scale-105">
+                    <div class="text-primary mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-circuit-icon lucide-brain-circuit"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Machine Learning & AI</h3>
+                    <p class="text-gray-300">Unlock your business’s full potential with AI & ML solutions. Using predictive analytics and intelligent automation to advanced data insights, we build scalable and reliable models that align with your goals. We cover the full pipeline, from data prep to deployment, working closely to identify pain points and seamlessly integrate AI into your systems using clear, business-friendly communication, turning your data into your strongest asset.</p>
+                    <div class="service-skills mt-4">
+                        <span class="skill-tag">TensorFlow/PyTorch</span>
+                        <span class="skill-tag">Predictive Analytics</span>
+                        <span class="skill-tag">Intelligent Automation</span>
+                        <span class="skill-tag">NLP (BERT / GPT)</span>
+                        <span class="skill-tag">Computer Vision (CNN, OpenCV)</span>
+                        <span class="skill-tag">Model Deployment (AWS, GCP)</span>
+                        <span class="skill-tag">Explainable AI (SHAP, LIME)</span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="neon-card rounded-xl p-8 transform transition-all duration-500 hover:scale-105">
+                    <div class="text-primary mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-combined-icon lucide-chart-no-axes-combined"><path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Data Science & Analysis</h3>
+                    <p class="text-gray-300">Transform your data into clear, strategic decisions through rigorous statistical analysis, beautiful visualizations, and professional reporting. We deliver end‑to‑end service: from data cleaning and exploration to dashboard creation and executive summaries, for your business needs. We streamline your operations, uncover hidden opportunities, and empower your leadership with insights that drive growth.</p>
+                    <div class="service-skills mt-4">
+                        <span class="skill-tag">Python, R, SQL</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Data Visualization (Tableau, Power BI, Matplotlib)</span>
+                        <span class="skill-tag">Exploratory Data Analysis (EDA)</span>
+                        <span class="skill-tag">Dashboard Reporting</span>
+                        <span class="skill-tag">Business Intelligence</span>
+                        <span class="skill-tag">KPI Tracking & Analytics</span>
+                        <span class="skill-tag">Time Series & Trend Analysis</span>
+                        <span class="skill-tag">Predictive Modeling</span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="neon-card rounded-xl p-8 transform transition-all duration-500 hover:scale-105">
+                    <div class="text-primary mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-icon lucide-code"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+                    <p class="text-gray-300">We build responsive, scalable, and dynamic web applications for your business needs. From front-end design and UX to back-end architecture, API integration, and cloud deployment, we deliver end-to-end solutions using modern stacks. Clean, maintainable code that offers performance and security, all wrapped in clear, client-oriented communication.</p>
+                    <div class="service-skills mt-4">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">Bootstrap</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="neon-card rounded-xl p-8 transform transition-all duration-500 hover:scale-105">
+                    <div class="text-primary mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-check-icon lucide-monitor-check"><path d="m9 10 2 2 4-4"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+                    <p class="text-gray-300">We create user-centered interfaces and seamless experiences backed by research and prototyping. From wireframes and high-fidelity mockups to usability testing and polished design systems, we offer visually engaging, easy-to-use websites that are user-friendly for your customers and drive business results.</p>
+                    <div class="service-skills mt-4">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">Wireframing</span>
+                        <span class="skill-tag">Responsive web design / Mobile-first design</span>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="neon-card rounded-xl p-8 transform transition-all duration-500 hover:scale-105">
+                    <div class="text-primary mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Content Writing</h3>
+                    <p class="text-gray-300">We deliver content that resonates with your brand voice: from blog posts and landing pages to whitepapers and technical docs. We write compelling copy that attracts, informs, and converts. With data-driven keyword research, on-page optimization, and attention to E-E-A-T standards, we ensure your content not only ranks but builds trust.</p>
+                    <div class="service-skills mt-4">
+                        <span class="skill-tag">Content Writing Services</span>
+                        <span class="skill-tag">Copywriting</span>
+                        <span class="skill-tag">SEO Optimization</span>
+                        <span class="skill-tag">Blog Writing</span>
+                        <span class="skill-tag">Technical Writing</span>
+                        <span class="skill-tag">Brand Voice</span>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="neon-card rounded-xl p-8 transform transition-all duration-500 hover:scale-105">
+                    <div class="text-primary mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share2-icon lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Social Media Marketing</h3>
+                    <p class="text-gray-300">Boost your online presence with targeted campaigns, branded content, and active community engagement. From creating content calendars and managing paid ads to launching UGC-driven hashtag campaigns and engaging with your audience in real time, we deliver measurable results that improve brand awareness, generate leads, and promote brand loyalty, all with clear, business-first communication.</p>
+                    <div class="service-skills mt-4">
+                        <span class="skill-tag">Strategy</span>
+                        <span class="skill-tag">Content Creation</span>
+                        <span class="skill-tag">Analytics</span>
+                        <span class="skill-tag">Community Management</span>
+                        <span class="skill-tag">Paid Ads</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet Our Team Section -->
+    <section id="team" class="py-20 bg-gradient-to-b from-dark to-primary-10">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" id="team-section">
+                <h2 class="section-title text-4xl font-bold mb-4">Meet Our Team</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">The brilliant minds driving innovation forward.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <!-- Team Member 1 -->
+                <div class="neon-card rounded-xl overflow-hidden transform transition-all duration-500 hover:scale-105">
+    <div class="relative h-40 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-90"></div>
+        <div class="h-full w-full bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+    </div>
+    <div class="p-6 relative -mt-12">
+        <div class="w-40 h-40 rounded-full border-4 border-primary mx-auto bg-dark relative overflow-hidden">
+            <img src="image/asad.png" alt="Asad Ali" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary"></div>
+        </div>
+        <div class="text-center mt-6">
+            <h3 class="text-2xl font-bold">Asad Ali</h3>
+            <p class="text-gray-300">Data Scientist | Machine Learning Engineer | Python Developer </p>
+            <p class="text-gray-400 mt-2">Asad Ali leads our AI team with a focus on transforming complex datasets into actionable business solutions. Experienced in Python, statistical modeling, and production-grade ML pipelines, he collaborates closely with stakeholders to design, develop, and deploy scalable models that directly support business objectives, with a balance of deep technical skill and clear communication.</p>
+        </div>
+    </div>
+    <div class="social-links flex gap-6 items-center justify-center mt-4 mb-6">
+    <a href="https://www.linkedin.com/in/muhammad-asad-ali01/" target="_blank" rel="noopener noreferrer" class="social-btn">
+        LinkedIn
+    </a>
+</div>
+</div>
+
+                <!-- Team Member 2 -->
+                <div class="neon-card rounded-xl overflow-hidden transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-40 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-90"></div>
+                        <div class="h-full w-full bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="p-6 relative -mt-12">
+                        <div class="w-40 h-40 rounded-full border-4 border-primary mx-auto bg-dark relative overflow-hidden">
+                            <img src="image/hadi.jpg" alt="Abdul Hadi" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary"></div>
+                        </div>
+                        <div class="text-center mt-6">
+                            <h3 class="text-2xl font-bold">Abdul Hadi</h3>
+                            <p class="text-gray-300"> AI & ML Specialist | Data Science and Visualization | Statistician | Content and Copywriter </p>
+                            <p class="text-gray-400 mt-2">Abdul Hadi combines deep expertise in AI and machine learning with strong statistical and data visualization skills. He specializes in transforming complex datasets into clear, insightful dashboards and models. As a seasoned writer, he also writes compelling technical content, creative articles, and persuasive copy, bridging the gap between data-driven insights and impactful storytelling. On his free time, he also writes short stories.</p>
+                        </div>
+                    </div>
+                     <div class="social-links flex gap-6 items-center justify-center mt-4 mb-6">
+    <a href="https://www.linkedin.com/in/khabdulhadis/" target="_blank" rel="noopener noreferrer" class="social-btn">
+        LinkedIn
+    </a>
+</div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="neon-card rounded-xl overflow-hidden transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-40 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-90"></div>
+                        <div class="h-full w-full bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="p-6 relative -mt-12">
+                        <div class="w-40 h-40 rounded-full border-4 border-primary mx-auto bg-dark relative overflow-hidden">
+                            <img src="image/unas.jpg" alt="Unas Shakeel" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary"></div>
+                        </div>
+                        <div class="text-center mt-6">
+                            <h3 class="text-2xl font-bold">Unas Shakeel</h3>
+                            <p class="text-gray-300">Web Development | Data Analyst | Social Media Manager</p>
+                            <p class="text-gray-400 mt-2">Unas Shakeel specializes in building strong web applications and creating engaging social media strategies. He develops clean, user-friendly websites, analyzes performance metrics to guide data-driven decision‑making, and makes content and campaigns that boost brand presence and engagement..</p>
+                        </div>
+                    </div>
+                    <div class="social-links flex gap-6 items-center justify-center mt-4 mb-6">
+    <a href="https://www.linkedin.com/in/unas-shakeel-134b79346/" target="_blank" rel="noopener noreferrer" class="social-btn">
+        LinkedIn
+    </a>
+</div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="neon-card rounded-xl overflow-hidden transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-40 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-90"></div>
+                        <div class="h-full w-full bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="p-6 relative -mt-12">
+                        <div class="w-40 h-40 rounded-full border-4 border-primary mx-auto bg-dark relative overflow-hidden">
+                            <img src="image/musa.jpg" alt="Musa Abbasi" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary"></div>
+                        </div>
+                        <div class="text-center mt-6">
+                            <h3 class="text-2xl font-bold">Musa Abbasi</h3>
+                            <p class="text-gray-300">Content Writer | Front-end Developer | Social Media Manager</p>
+                            <p class="text-gray-400 mt-2">Musa Abbasi brings together expertise in creating engaging content, building dynamic websites, and managing strategic social media campaigns. He writes compelling copy and articles for each brand's voice, develops responsive front-end interfaces using modern technologies, and designs data-driven social media strategies to boost engagement and reach.</p>
+                        </div>
+                    </div>
+                    <div class="social-links flex gap-6 items-center justify-center mt-4 mb-6">
+    <a href="https://www.linkedin.com/in/musa-abbasi-3001b7204/" target="_blank" rel="noopener noreferrer" class="social-btn">
+        LinkedIn
+    </a>
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative gradient-bg diagonal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" id="projects-section">
+                <h2 class="section-title text-4xl font-bold mb-4">Our Projects</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Discover our portfolio of groundbreaking projects that redefine technology.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Project 1 -->
+                <div class="neon-card rounded-xl p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-48 overflow-hidden rounded-lg">
+                        <img src="image/project1.jpg" alt="Quantum AI Platform" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">Quantum AI Platform</h3>
+                        <p class="text-gray-300">A revolutionary AI platform leveraging quantum computing for unparalleled performance.</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="neon-card rounded-xl p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-48 overflow-hidden rounded-lg">
+                        <img src="image/project2.jpg" alt="Decentralized Marketplace" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">Decentralized Marketplace</h3>
+                        <p class="text-gray-300">A blockchain-based marketplace ensuring secure and transparent transactions.</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="neon-card rounded-xl p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-48 overflow-hidden rounded-lg">
+                        <img src="image/project3.jpg" alt="AR Training Suite" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">AR Training Suite</h3>
+                        <p class="text-gray-300">An augmented reality platform for immersive training and education.</p>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="neon-card rounded-xl p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-48 overflow-hidden rounded-lg">
+                        <img src="image/project4.jpg" alt="VR Simulation" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">VR Simulation</h3>
+                        <p class="text-gray-300">A virtual reality platform for interactive simulations and training.</p>
+                    </div>
+                </div>
+                <!-- Project 5 -->
+                <div class="neon-card rounded-xl p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-48 overflow-hidden rounded-lg">
+                        <img src="image/project5.jpg" alt="Data Visualization Tool" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">Data Visualization Tool</h3>
+                        <p class="text-gray-300">A tool for creating interactive and insightful data visualizations.</p>
+                    </div>
+                </div>
+                <!-- Project 6 -->
+                <div class="neon-card rounded-xl p-6 transform transition-all duration-500 hover:scale-105">
+                    <div class="relative h-48 overflow-hidden rounded-lg">
+                        <img src="image/project6.jpg" alt="AI Chatbot" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-20 to-secondary-20"></div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-bold mb-2">AI Chatbot</h3>
+                        <p class="text-gray-300">An intelligent chatbot solution for customer engagement and support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+<section id="contact" class="py-20">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16" id="contact-section">
+            <h2 class="text-4xl font-bold text-white mb-4">Get In Touch</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                Ready to transform your digital presence? Let's discuss your next project.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <!-- Contact Info -->
+            <div class="space-y-6 text-white" id="contact-info">
+                <h3 class="text-2xl font-semibold">Let's Start a Conversation</h3>
+                <p class="text-gray-300">
+                    We're always excited to work on innovative projects and help businesses make full use of the power of AI and modern technology. Reach out and let's create something amazing together.
+                </p>
+
+                <div class="mt-6">
+                    <h4 class="font-semibold">Quick Response</h4>
+                    <p class="text-gray-300">
+                        We typically respond to all inquiries within 24 hours. For urgent matters, feel free to call us directly.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+<section>             
+            <form id="contact-form" class="space-y-6">
+             <div>
+               <label for="name" class="block text-sm font-medium text-white mb-1">Name <span class="text-pink-500">*</span></label>
+               <input type="text" id="name" name="name" required placeholder="Your name" class="w-full p-3 rounded-lg bg-transparent text-white border border-indigo-500 focus:outline-none focus:ring-2 focus:ring-pink-500">
+            </div>
+            <div>
+               <label for="email" class="block text-sm font-medium text-white mb-1">Email <span class="text-pink-500">*</span></label>
+               <input type="email" id="email" name="email" required placeholder="your@email.com" class="w-full p-3 rounded-lg bg-transparent text-white border border-indigo-500 focus:outline-none focus:ring-2 focus:ring-pink-500">
+             </div>
+            <div>
+                <label for="about" class="block text-sm font-medium text-white mb-1">Something about yourself/business <span class="text-pink-500">*</span></label>
+                 <textarea id="about" name="about" rows="4" required placeholder="Something about yourself/business..." class="w-full p-3 rounded-lg bg-transparent text-white border border-indigo-500 focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+            </div>
+            <div>
+                <label for="project" class="block text-sm font-medium text-white mb-1">Detail about the project <span class="text-pink-500">*</span></label>
+                <textarea id="project" name="project" rows="4" required placeholder="Tell us about the project..." class="w-full p-3 rounded-lg bg-transparent text-white border border-indigo-500 focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+            </div>
+                <p id="form-status" class="text-sm mt-2"></p>
+                <div class="text-right">
+                <button type="submit" id="btn-text" class="px-8 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-bold transition-all duration-300 hover:shadow-lg hover:shadow-pink-400/40">
+                Send Message
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="py-10 bg-dark border-t border-primary border-opacity-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-6 md:mb-0" id="footer-logo">
+                    <h3 class="text-2xl font-bold glow-text">Infonetra</h3>
+                    <p class="text-gray-300 mt-2">Shaping the future of how businesses work.</p>
+                </div>
+                <div class="flex w-full justify-end space-x-6 mt-4 md:mt-0">
+                    <a href="https://www.linkedin.com/in/infonetra-group/" class="text-primary hover:text-accent" target="_blank" rel="noopener">
+                        <img src="image/linkedin.png" alt="LinkedIn" style="height: 40px; width: auto;"/>
+                    </a>
+                    <a href="https://www.instagram.com/infonetra_group/" class="text-primary hover:text-accent" target="_blank" rel="noopener">
+                        <img src="image/Instagram-Icon.png" alt="Insta" style="height: 40px; width: auto;"/>
+                </div>
+            </div>
+            <div class="text-center mt-8 text-gray-400" id="footer-text">
+                <p>© 2025 Infonetra. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="md:hidden fixed inset-0 bg-dark bg-opacity-95 z-50 hidden" id="mobile-menu">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#services" class="text-2xl uppercase tracking-wider hover:text-primary">Services</a>
+            <a href="#team" class="text-2xl uppercase tracking-wider hover:text-primary">Team</a>
+            <a href="#projects" class="text-2xl uppercase tracking-wider hover:text-primary">Projects</a>
+            <a href="#contact" class="text-2xl uppercase tracking-wider hover:text-primary">Contact</a>
+            <button class="text-primary focus:outline-none" id="close-menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+</body>
+<script src="script.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("ubAIXfV2EInjXCzP4"); 
+  })();
+
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const btn = document.getElementById("btn-text");
+    const status = document.getElementById("form-status");
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const about = document.getElementById("about").value;
+    const project = document.getElementById("project").value;
+    const time = new Date().toLocaleString();
+
+    btn.innerText = "Sending...";
+    status.innerText = "";
+
+    emailjs.send("service_422g3to", "template_bfj3f48", {
+      name: name,
+      email: email,
+      about: about,
+      project: project,
+      time: time
+    }).then(() => {
+      btn.innerText = "Send Message";
+      status.innerText = "✅ Message sent successfully! We’ll get back to you shortly.";
+      status.style.color = "green";
+      document.getElementById("contact-form").reset();
+    }, (error) => {
+      btn.innerText = "Send Message";
+      status.innerText = "❌ Failed to send message.";
+      status.style.color = "red";
+      console.error("EmailJS error:", error);
+    });
+  });
+</script>
+</html>
