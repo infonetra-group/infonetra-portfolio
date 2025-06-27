@@ -56,5 +56,3 @@ Have a project in mind? Let's talk!
 📱 Socials: [LinkedIn](https://www.linkedin.com/in/infonetra-group/) | [Instagram](https://www.instagram.com/infonetra_group/)
 
 © 2025 Infonetra. All rights reserved.
-
-```
